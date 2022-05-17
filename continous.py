@@ -20,7 +20,7 @@ def get_next_pass():
         nextPassTime = passes["passes"][0]["maxUTC"] - int(time.time())
         
         # Send notification
-        if nextPassTime < 999993600:
+        if nextPassTime < 3600:
             print(f"A visable pass is happening in {nextPassTime} seconds for {user.first_name}!")
       
         
