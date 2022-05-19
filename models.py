@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from sqlalchemy import or_
 
 # Initialize Bcypt
 bcrypt = Bcrypt()
@@ -73,8 +74,8 @@ class User(db.Model):
         return False
     
     @classmethod
-    def get_all_for_notifications(cls, notification_method_id):
-        return cls.query.filter_by(notification_method_id=notification_method_id).all()
+    def get_all_for_notifications(cls):
+        return cls.query.filter(or_(User.notification_method_id == 1, User.notification_method_id == 2)).all()
 
     
 ###########

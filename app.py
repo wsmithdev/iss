@@ -1,21 +1,22 @@
+import os
 from crypt import methods
 from flask import Flask, redirect, render_template, g, session
 from sqlalchemy.exc import IntegrityError
-import time
+from dotenv import load_dotenv
 import threading
 from models import db, connect_db, User, Location, Notification
 from forms import SignUpForm, LoginForm, EditProfileForm
 from iss_location import get_ISS_location
-from iss_passes import iss_passes
-from continous import continuous_call
+from continuous import continuous_call
 
-
+# Environment variables
+load_dotenv()
 
 # App setup
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///iss-tracker'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = "config('DB_SECRET_KEY', default='')"
+app.config['SECRET_KEY'] = os.environ.get("DB_SECRET_KEY")
 
 
 # Connect to db
@@ -184,7 +185,6 @@ def edit_profile():
     else:
         return render_template('users/edit.html', form=form, user_id=user_id, button="Save")
     
-
 
 
 

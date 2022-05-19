@@ -5,17 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"
+    />
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/popper"></script>
+    <script src="https://unpkg.com/bootstrap"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    />
+    <link rel="stylesheet" href="/static/stylesheets/style.css" />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
   </head>
   <body>
     <h1>Sign up</h1>
     <form method="POST" id="user_form">
-      {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
-      'hidden' %} {% for error in field.errors %}
-      <span>{{ error }}</span>
-      {% endfor %} {{ field(placeholder=field.label.text, class="form-control")
-      }} {% endfor %}
-
-      <button>{{ button }}</button>
+      <div>
+        {{ form.hidden_tag() }}
+    
+        <div>{{form.first_name.label}} : {{form.first_name}}</div>
+        <div>{{form.last_name.label}} : {{form.last_name}}</div>
+        <div>{{form.email.label}} : {{form.email}}</div>
+        <div>{{form.password.label}} : {{form.password}}</div>
+        <div>
+          <input id="street" type="text" placeholder="Street">
+          <input id="city" type="text" placeholder="City">
+          <input id="country" type="text" placeholder="Country">
+          <div class="btn btn-danger" id="validate-btn">
+            <p>Validate Address</p>
+          </div>
+        </div>
+        <div>{{form.lat.label}} : {{form.lat(id="lat-field")}}</div>
+        <div>{{form.long.label}} : {{form.long(id="long-field")}}</div>
+        <div>{{form.method.label}} : {{form.method}}</div>
+        <div>{{form.cellphone.label}} : {{form.cellphone}}</div>
+    
+        <button class="btn btn-success">{{ button }}</button>
+       </div>
     </form>
+    <script src="/static/validateAddress.js"></script>
   </body>
 </html>
