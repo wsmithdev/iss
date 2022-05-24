@@ -9,6 +9,9 @@ from forms import SignUpForm, LoginForm, EditProfileForm
 from iss_location import get_ISS_location
 from continuous import continuous_call
 
+from geoalchemy2.types import Geography
+from geoalchemy2.functions import ST_Distance, ST_Transform
+
 # Environment variables
 load_dotenv()
 
@@ -56,6 +59,12 @@ def do_logout():
 # ROUTES
 ##############################################################################
 
+# Test
+@app.route('/test')
+def test():
+    distance = db.session.execute("select st_distance('POINT(-74.038409 40.712602)'::geography, 'POINT(-81.3927381 30.2918842)'::geography);")
+    print(list(distance))
+    return f"<h1>Test</h1>"
 
 ####################
 # Navigation Routes
@@ -186,7 +195,12 @@ def edit_profile():
         return render_template('users/edit.html', form=form, user_id=user_id, button="Save")
     
 
-
+# Delete profile 
+#################
+@app.route('/profile/delete/<int:user_id>')
+def delete_user(user_id):
+    
+    return redirect('/')
 
 
 

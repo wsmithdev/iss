@@ -16,8 +16,12 @@ const makeAPIcall = (street, city, country) => {
         .then(response => response.json())
         .then(result => {
             updateDOM(result)
+            alert("Address validated")
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.log('error', error)
+            alert("Something went wrong")
+        });
 
 }
 

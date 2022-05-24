@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from sqlalchemy import or_
+from geoalchemy2.types import Geography
 
 # Initialize Bcypt
 bcrypt = Bcrypt()
@@ -73,9 +74,6 @@ class User(db.Model):
             
         return False
     
-    @classmethod
-    def get_all_for_notifications(cls):
-        return cls.query.filter(or_(User.notification_method_id == 1, User.notification_method_id == 2)).all()
 
     
 ###########
@@ -87,6 +85,7 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lat = db.Column(db.Text, nullable=False)
     long = db.Column(db.Text, nullable=False)
+    geolocation = db.Column(Geography('POINT'))
     
     # Add location to database
     @classmethod
@@ -95,13 +94,20 @@ class Location(db.Model):
         #Create location model
         location = Location(
             lat=lat,
-            long=long
+            long=long,
+            geolocation=f'POINT({long} {lat})'
         )
         
         # Add to database
         db.session.add(location)
         
         return location
+    
+    # Get users within range, with notifications turned on
+    @classmethod
+    def get_users_in_range(cls, longitute, latitude, radius):
+        users = db.session.execute(f'SELECT users.id, ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) AS distance FROM users INNER JOIN location ON users.location_id = location.id WHERE ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) < {radius} AND users.notification_method_id != 1;')
+        return users
     
 ######################
 # Notification Method
