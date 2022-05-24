@@ -13,7 +13,7 @@ class SignUpForm(FlaskForm):
     password = PasswordField('Password', validators=[Length(min=6)])
     address = StringField('Address')
     lat = StringField('Latitude', validators=[DataRequired()])
-    long = StringField('Latitude', validators=[DataRequired()])
+    long = StringField('Longtitude', validators=[DataRequired()])
     method = RadioField('Notification Method')
     cellphone = IntegerField('Cellphone Number', validators=[DataRequired()])
     

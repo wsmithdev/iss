@@ -106,7 +106,7 @@ class Location(db.Model):
     # Get users within range, with notifications turned on
     @classmethod
     def get_users_in_range(cls, longitute, latitude, radius):
-        users = db.session.execute(f'SELECT users.id, ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) AS distance FROM users INNER JOIN location ON users.location_id = location.id WHERE ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) < {radius} AND users.notification_method_id != 1;')
+        users = db.session.execute(f'SELECT users.id, location.long, location.lat, ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) AS distance FROM users INNER JOIN location ON users.location_id = location.id WHERE ST_Distance(ST_MakePoint({longitute}, {latitude}), location.geolocation) < {radius} AND users.notification_method_id != 3;')
         return users
     
 ######################

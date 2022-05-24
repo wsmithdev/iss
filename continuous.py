@@ -1,5 +1,5 @@
 import time
-from iss_passes_ import get_next_pass
+from iss import get_next_pass
 
 # Continuous call
 def continuous_call():

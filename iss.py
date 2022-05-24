@@ -15,21 +15,8 @@ def iss_passes(lat, long):
     iss_passes = json.loads(data)
     return iss_passes
 
-# def get_next_pass():
-#     users = User.get_all_for_notifications()
-#     for user in users:
-#         # Get visable passes
-#         location = Location.query.get(user.id)
-#         passes = iss_passes(location.lat, location.long)
-        
-#         # How long before the next visable pass
-#         timeUntilPass = passes["passes"][0]["maxUTC"] - int(time.time())
-        
-#         # Send notification
-#         if timeUntilPass < 3600:
-#             send_notification(user, to_mm_ss(timeUntilPass))
 
-def get_next_pass():
+def get_users_in_radius():
     # Get ISS location
     iss_location = get_ISS_location()
     longitute = iss_location["iss_position"]["longitude"]
@@ -37,10 +24,28 @@ def get_next_pass():
     
 
     # Get all users in 1000 mile radius
-    radius = 1000 * 1.60934 * 1000
+    radius = 1000000 * 1.60934 * 1000
     users_in_range = Location.get_users_in_range(longitute, latitude, radius)
-    for user in users_in_range:
-        print(user)
+    return users_in_range
     
 
-         
+def get_next_pass():
+    users = get_users_in_radius()
+    
+    for user in users:
+        user_id = user[0]
+        long = user[1]
+        lat = user[2]
+        
+        passes = iss_passes(lat, long)
+        
+        timeUntilPass = passes["passes"][0]["maxUTC"] - int(time.time())
+        print(timeUntilPass)
+        
+        if timeUntilPass < 3600:
+            send_notification(user_id, to_mm_ss(timeUntilPass))
+            
+        
+     
+        
+        

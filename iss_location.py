@@ -6,6 +6,5 @@ def get_ISS_location():
     response = urllib.request.urlopen(URL)
     data = response.read()
     iss_location = json.loads(data)
-    print(iss_location)
     return iss_location
     

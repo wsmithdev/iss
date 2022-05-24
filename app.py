@@ -59,13 +59,6 @@ def do_logout():
 # ROUTES
 ##############################################################################
 
-# Test
-@app.route('/test')
-def test():
-    distance = db.session.execute("select st_distance('POINT(-74.038409 40.712602)'::geography, 'POINT(-81.3927381 30.2918842)'::geography);")
-    print(list(distance))
-    return f"<h1>Test</h1>"
-
 ####################
 # Navigation Routes
 ####################
