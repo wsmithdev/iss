@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <title>ISS Tracker</title>
+    <!-- bootstrap.min css -->
+    <link rel="stylesheet" href= {{ url_for("static",filename="plugins/bootstrap/css/bootstrap.css") }}>
+    <!-- Icofont Css -->
+    <link rel="stylesheet" href= {{ url_for("static",filename="plugins/fontawesome/css/all.css") }}>
+    <!-- animate.css -->
+    <link rel="stylesheet" href= {{ url_for("static",filename="plugins/animate-css/animate.css") }}>
+    <!-- Icofont -->
+    <link rel="stylesheet" href= {{ url_for("static",filename="plugins/icofont/icofont.css") }}>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href= {{ url_for("static",filename="css/style.css") }}>
+</head>
+<nav style="background-color: black;" class="navbar navbar-expand-lg fixed-top trans-navigation">
+        <div class="container">
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link smoth-scroll" href="/">Home</a>
+                </li>
+            </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+              </button>
+            
+
+            <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+                <ul class="navbar-nav ">
+                    {% if not g.user %}
+                    <li class="nav-item">
+                        <a class="nav-link smoth-scroll" href="/signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smoth-scroll" href="/login">Log In</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link smoth-scroll" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smoth-scroll" href="/logout">Logout</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--MAIN HEADER AREA END -->
+    {% block content %}
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+
+    
+    <!-- Main jQuery -->
+    <script src= {{ url_for("static",filename="plugins/jquery/jquery.min.js") }} ></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src= {{ url_for("static",filename="plugins/bootstrap/js/popper.min.js") }} ></script>
+    <script src= {{ url_for("static",filename="plugins/bootstrap/js/bootstrap.min.js") }} ></script>
+   <!-- Woow animtaion -->
+    <script src= {{ url_for("static",filename="plugins/counterup/wow.min.js") }} ></script>
+    <script src= {{ url_for("static",filename="plugins/counterup/jquery.easing.1.3.js") }} ></script>
+     <!-- Counterup -->
+    <script src= {{ url_for("static",filename="plugins/counterup/jquery.waypoints.js") }} ></script>
+    <script src= {{ url_for("static",filename="plugins/counterup/jquery.counterup.min.js") }} ></script>
+
+    <!-- Google Map -->
+    <!-- <script src= {{ url_for("static",filename="plugins/google-map/gmap3.min.js") }} ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    -->
+    
+    <!-- Contact Form -->
+    <script src= {{ url_for("static",filename="plugins/jquery/contact.js") }} ></script>
+    <script src= {{ url_for("static",filename="js/custom.js") }} ></script>
+
+  </body>
+  </html>
+   

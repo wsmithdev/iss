@@ -82,7 +82,6 @@ def iss():
 #############
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
-    
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
          
@@ -91,6 +90,7 @@ def signup():
     form.method.choices = notification_method_choices
     
     if form.validate_on_submit():
+        print("Trying to sign up")
         # Save location to database
         location = Location.add_location(
             lat=form.lat.data,
@@ -112,6 +112,7 @@ def signup():
         do_login(user)
         return redirect('/')
     else:
+        print("Not trying to sign up")
         return render_template('auth/signup.html', form=form, button='Sign up')
        
  
