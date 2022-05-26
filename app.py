@@ -41,8 +41,8 @@ db.session.add(email)
 db.session.add(text)
 db.session.add(none)
 
-newThread = threading.Thread(target=continuous_call)
-newThread.start()
+# newThread = threading.Thread(target=continuous_call)
+# newThread.start()
 
 ##############################################################################
 # User auth
