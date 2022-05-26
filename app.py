@@ -15,7 +15,13 @@ load_dotenv()
 
 # App setup
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "postgresql:///iss-tracker")
+# Fix Heroku URL Issue
+uri = os.environ.get("DATABASE_URL", "postgresql:///iss-tracker")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+# App setup continued
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "secretkey123")
 
