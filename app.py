@@ -9,24 +9,19 @@ from forms import SignUpForm, LoginForm, EditProfileForm
 from iss_location import get_ISS_location
 from continuous import continuous_call
 
-from geoalchemy2.types import Geography
-from geoalchemy2.functions import ST_Distance, ST_Transform
 
 # Environment variables
 load_dotenv()
 
 # App setup
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "postgresql:///iss-tracker")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "secretkey123")
 
 
 # Connect to db
 connect_db(app)
-
-# Create tables
-db.create_all()
 
 newThread = threading.Thread(target=continuous_call)
 newThread.start()
