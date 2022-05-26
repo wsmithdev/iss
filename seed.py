@@ -1,5 +1,4 @@
 from models import db, Notification
-from app import app
 
 # Create tables
 db.drop_all()
