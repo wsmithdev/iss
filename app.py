@@ -32,14 +32,6 @@ connect_db(app)
 db.drop_all()
 db.create_all()
 
-# Seed data
-email = Notification('Email')
-text = Notification('Text')
-none = Notification('None')
-
-db.session.add(email)
-db.session.add(text)
-db.session.add(none)
 
 # newThread = threading.Thread(target=continuous_call)
 # newThread.start()
