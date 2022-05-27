@@ -33,8 +33,8 @@ db.drop_all()
 db.create_all()
 
 
-newThread = threading.Thread(target=continuous_call)
-newThread.start()
+# newThread = threading.Thread(target=continuous_call)
+# newThread.start()
 
 ##############################################################################
 # User auth
