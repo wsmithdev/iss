@@ -29,8 +29,8 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "secretkey123")
 # Connect to db
 connect_db(app)
 # Create tables
-db.drop_all()
-db.create_all()
+# db.drop_all()
+# db.create_all()
 
 
 # newThread = threading.Thread(target=continuous_call)
