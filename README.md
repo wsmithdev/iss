@@ -1,6 +1,6 @@
 # International Space Station Tracker
 
-[Check it out the live site!](https://sb-iss-tracker.herokuapp.com/)
+[Check out the live site!](https://sb-iss-tracker.herokuapp.com/)
 
 *or*
 
